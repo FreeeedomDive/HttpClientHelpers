@@ -12,10 +12,14 @@ public static class CommonInterfaceGenerator
         var interfaceName = $"I{commonNamespace.Replace(".", string.Empty)}Client";
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
-                 .AppendLine($"namespace {commonNamespace}.Client;")
-                 .AppendLine()
-                 .AppendLine($"public interface {interfaceName}")
-                 .AppendLine("{");
+                 .AppendLine();
+        foreach (var apiControllerInfo in apiControllerInfos)
+        {
+            sb.AppendLine($"using {commonNamespace}.Client.{apiControllerInfo.Name}");
+        }
+
+        sb.AppendLine($"public interface {interfaceName}")
+          .AppendLine("{");
         foreach (var apiControllerInfo in apiControllerInfos)
         {
             sb.AppendIndent().AppendLine($"{apiControllerInfo.GetClientName(true)} {apiControllerInfo.Name} {{ get; }}");

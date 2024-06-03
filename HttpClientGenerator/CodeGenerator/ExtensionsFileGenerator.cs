@@ -6,7 +6,7 @@ public static class ExtensionsFileGenerator
 {
     public static GeneratedFileContent GenerateRestResponseExtensions(ApiControllerInfo apiControllerInfo)
     {
-        var restResponseExtensionsFileContent = @$"
+        var restResponseExtensionsFileContent = @$"/* Generated file */
 using Newtonsoft.Json;
 using RestSharp;
 using Xdd.HttpHelpers.Models.Exceptions;

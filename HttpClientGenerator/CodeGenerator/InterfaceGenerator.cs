@@ -11,7 +11,7 @@ public static class InterfaceGenerator
         var interfaceName = apiControllerInfo.GetClientName(true);
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
-                 .AppendLine($"namespace {apiControllerInfo.Namespace}.Client;")
+                 .AppendLine($"namespace {apiControllerInfo.Namespace}.Client.{apiControllerInfo.Name};")
                  .AppendLine()
                  .AppendLine($"public interface {interfaceName}")
                  .AppendLine("{");
