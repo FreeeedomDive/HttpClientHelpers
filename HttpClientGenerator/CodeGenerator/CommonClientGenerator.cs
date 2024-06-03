@@ -13,7 +13,8 @@ public static class CommonClientGenerator
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
                  .AppendLine($"namespace {commonNamespace}.Client;")
-                 .AppendLine($"public class {clientName}")
+                 .AppendLine()
+                 .AppendLine($"public class {clientName} : I{clientName}")
                  .AppendLine("{")
                  .AppendIndent().AppendLine($"public {clientName}(RestSharp.RestClient restClient)")
                  .AppendIndent().AppendLine("{");

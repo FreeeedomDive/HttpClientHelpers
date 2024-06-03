@@ -13,6 +13,7 @@ public static class CommonInterfaceGenerator
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
                  .AppendLine($"namespace {commonNamespace}.Client;")
+                 .AppendLine()
                  .AppendLine($"public interface {interfaceName}")
                  .AppendLine("{");
         foreach (var apiControllerInfo in apiControllerInfos)

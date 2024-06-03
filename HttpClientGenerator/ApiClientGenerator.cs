@@ -2,7 +2,7 @@
 using Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 using Xdd.HttpHelpers.HttpClientGenerator.FilesCreator;
 
-namespace HttpClientGenerator;
+namespace Xdd.HttpHelpers.HttpClientGenerator;
 
 public static class ApiClientGenerator
 {
