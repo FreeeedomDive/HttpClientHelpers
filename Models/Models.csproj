@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <PackageId>Xdd.HttpHelpers.Models</PackageId>
+        <Title>HttpHelpers.Models</Title>
+        <Authors>hortari</Authors>
+        <Version>$(VersionSuffix)</Version>
+        <Description>Models for HTTP</Description>
+    </PropertyGroup>
+
+</Project>
