@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Models.Exceptions;
+namespace Xdd.HttpHelpers.Models.Exceptions;
 
 public class BadRequestException : HttpResponseExceptionBase
 {

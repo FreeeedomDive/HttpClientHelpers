@@ -9,6 +9,8 @@
         <Authors>hortari</Authors>
         <Version>$(VersionSuffix)</Version>
         <Description>Models for HTTP</Description>
+        <AssemblyName>Xdd.HttpHelpers.Models</AssemblyName>
+        <RootNamespace>Xdd.HttpHelpers.Models</RootNamespace>
     </PropertyGroup>
 
 </Project>

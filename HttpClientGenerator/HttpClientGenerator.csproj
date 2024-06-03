@@ -9,6 +9,8 @@
         <Authors>hortari</Authors>
         <Version>$(VersionSuffix)</Version>
         <Description>HTTP clients generator with RestSharp.RestClient core client</Description>
+        <AssemblyName>Xdd.HttpHelpers.HttpClientGenerator</AssemblyName>
+        <RootNamespace>Xdd.HttpHelpers.HttpClientGenerator</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
