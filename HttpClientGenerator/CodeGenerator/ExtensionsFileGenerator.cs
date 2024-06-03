@@ -1,6 +1,6 @@
-﻿using ClientsGenerator.Models;
+﻿using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
-namespace ClientsGenerator.CodeGenerator;
+namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
 public static class ExtensionsFileGenerator
 {
@@ -9,6 +9,7 @@ public static class ExtensionsFileGenerator
         var restResponseExtensionsFileContent = @$"
 using Newtonsoft.Json;
 using RestSharp;
+using Xdd.HttpHelpers.Models.Exceptions;
 
 namespace {apiControllerInfo.Namespace}.Client.Extensions;
 
@@ -26,11 +27,11 @@ public static class RestResponseExtensions
             throw new Exception(""Content is null"");
         }}
 
-        var knownApiException = JsonConvert.DeserializeObject<Exception>(restResponse.Content, new JsonSerializerSettings
+        var knownApiException = JsonConvert.DeserializeObject<HttpResponseExceptionBase>(restResponse.Content, new JsonSerializerSettings
         {{
             TypeNameHandling = TypeNameHandling.All,
         }});
-        throw knownApiException ?? new Exception(""Unknown API error"");
+        throw knownApiException ?? new InternalServerErrorException(""Unknown API error"");
     }}
 
     public static T TryDeserialize<T>(this RestResponse restResponse)

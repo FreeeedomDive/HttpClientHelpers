@@ -1,4 +1,4 @@
-﻿namespace ClientsGenerator.Extensions;
+﻿namespace Xdd.HttpHelpers.HttpClientGenerator.Extensions;
 
 public static class TypeExtensions
 {

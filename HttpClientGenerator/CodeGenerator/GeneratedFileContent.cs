@@ -1,4 +1,4 @@
-﻿namespace ClientsGenerator.CodeGenerator;
+﻿namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
 public class GeneratedFileContent
 {

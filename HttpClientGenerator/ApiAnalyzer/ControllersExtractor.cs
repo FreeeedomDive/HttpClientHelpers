@@ -1,9 +1,8 @@
 ﻿using System.Reflection;
-using ClientsGenerator.Models;
-using HttpClientGenerator.ApiAnalyzer;
 using Microsoft.AspNetCore.Mvc;
+using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
-namespace ClientsGenerator.ApiAnalyzer;
+namespace Xdd.HttpHelpers.HttpClientGenerator.ApiAnalyzer;
 
 public static class ControllersExtractor
 {

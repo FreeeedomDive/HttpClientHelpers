@@ -1,6 +1,6 @@
-﻿using ClientsGenerator.ApiAnalyzer;
-using ClientsGenerator.CodeGenerator;
-using ClientsGenerator.FilesCreator;
+﻿using Xdd.HttpHelpers.HttpClientGenerator.ApiAnalyzer;
+using Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
+using Xdd.HttpHelpers.HttpClientGenerator.FilesCreator;
 
 namespace HttpClientGenerator;
 

@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using ClientsGenerator.Extensions;
-using ClientsGenerator.Models;
+using Xdd.HttpHelpers.HttpClientGenerator.Extensions;
+using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
-namespace ClientsGenerator.CodeGenerator;
+namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
 public static class InterfaceGenerator
 {

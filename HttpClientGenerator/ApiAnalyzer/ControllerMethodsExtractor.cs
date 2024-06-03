@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
-using ClientsGenerator.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
-namespace HttpClientGenerator.ApiAnalyzer;
+namespace Xdd.HttpHelpers.HttpClientGenerator.ApiAnalyzer;
 
 public static class ControllerMethodsExtractor
 {

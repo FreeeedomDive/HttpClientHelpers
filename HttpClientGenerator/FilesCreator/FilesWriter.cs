@@ -1,6 +1,6 @@
-﻿using ClientsGenerator.CodeGenerator;
+﻿using Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
-namespace ClientsGenerator.FilesCreator;
+namespace Xdd.HttpHelpers.HttpClientGenerator.FilesCreator;
 
 public static class FilesWriter
 {

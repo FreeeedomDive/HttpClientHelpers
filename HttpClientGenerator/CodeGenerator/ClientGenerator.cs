@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
-using ClientsGenerator.Extensions;
-using ClientsGenerator.Models;
+using Xdd.HttpHelpers.HttpClientGenerator.Extensions;
+using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
-namespace ClientsGenerator.CodeGenerator;
+namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
 public static class ClientGenerator
 {

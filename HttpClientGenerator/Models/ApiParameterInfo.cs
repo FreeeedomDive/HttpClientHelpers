@@ -1,4 +1,4 @@
-﻿namespace ClientsGenerator.Models;
+﻿namespace Xdd.HttpHelpers.HttpClientGenerator.Models;
 
 public class ApiParameterInfo
 {

@@ -1,6 +1,6 @@
-﻿using ClientsGenerator.Models;
+﻿using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
-namespace ClientsGenerator.Extensions;
+namespace Xdd.HttpHelpers.HttpClientGenerator.Extensions;
 
 public static class ApiControllerInfoExtensions
 {
