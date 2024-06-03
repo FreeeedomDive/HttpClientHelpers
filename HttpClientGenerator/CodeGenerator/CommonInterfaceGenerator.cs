@@ -15,10 +15,12 @@ public static class CommonInterfaceGenerator
                  .AppendLine();
         foreach (var apiControllerInfo in apiControllerInfos)
         {
-            sb.AppendLine($"using {commonNamespace}.Client.{apiControllerInfo.Name}");
+            sb.AppendLine($"using {commonNamespace}.Client.{apiControllerInfo.Name};");
         }
 
-        sb.AppendLine($"public interface {interfaceName}")
+        sb.AppendLine()
+          .AppendLine($"namespace {commonNamespace}.Client;")
+          .AppendLine().AppendLine($"public interface {interfaceName}")
           .AppendLine("{");
         foreach (var apiControllerInfo in apiControllerInfos)
         {

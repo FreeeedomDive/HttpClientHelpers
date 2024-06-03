@@ -15,10 +15,11 @@ public static class CommonClientGenerator
             .AppendLine();
         foreach (var apiControllerInfo in apiControllerInfos)
         {
-            sb.AppendLine($"using {commonNamespace}.Client.{apiControllerInfo.Name}");
+            sb.AppendLine($"using {commonNamespace}.Client.{apiControllerInfo.Name};");
         }
 
-        sb.AppendLine($"namespace {commonNamespace}.Client;")
+        sb.AppendLine()
+          .AppendLine($"namespace {commonNamespace}.Client;")
           .AppendLine()
           .AppendLine($"public class {clientName} : I{clientName}")
           .AppendLine("{")
