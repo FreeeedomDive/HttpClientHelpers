@@ -17,7 +17,6 @@ public static class ApiClientGenerator
 
         var commonInterfaceFileContent = CommonInterfaceGenerator.Generate(controllersInfo);
         var commonClientFileContent = CommonClientGenerator.Generate(controllersInfo);
-        var extensionsFileContent = ExtensionsFileGenerator.GenerateRestResponseExtensions(controllersInfo.First());
         var clientsFilesContent = controllersInfo.SelectMany(
             x => new[]
             {
@@ -26,7 +25,7 @@ public static class ApiClientGenerator
             }
         ).ToArray();
 
-        FilesWriter.WriteFiles(projectPath, clientsFilesContent.Concat(new []{commonInterfaceFileContent, commonClientFileContent, extensionsFileContent}).ToArray());
+        FilesWriter.WriteFiles(projectPath, clientsFilesContent.Concat(new []{commonInterfaceFileContent, commonClientFileContent}).ToArray());
         Console.WriteLine($"Generated {controllersInfo.Length} clients for project {controllersInfo.First().Namespace}");
         Console.WriteLine("Make sure to install following NuGet packages to your project with generated clients: RestSharp, Xdd.HttpHelpers.HttpClientGenerator");
     }

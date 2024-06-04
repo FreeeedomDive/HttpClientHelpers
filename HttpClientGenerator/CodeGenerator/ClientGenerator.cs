@@ -13,7 +13,7 @@ internal static class ClientGenerator
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
                  .AppendLine("using RestSharp;")
-                 .AppendLine($"using {apiControllerInfo.Namespace}.Client.Extensions;")
+                 .AppendLine("using Xdd.HttpHelpers.Models.Extensions;")
                  .AppendLine()
                  .AppendLine($"namespace {apiControllerInfo.Namespace}.Client.{apiControllerInfo.Name};")
                  .AppendLine()
