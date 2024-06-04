@@ -21,7 +21,10 @@ internal static class InterfaceGenerator
             var friendlyTypeName = method.ReturnType.GetFriendlyTypeName();
             var taskWrapperTypeName = string.IsNullOrEmpty(friendlyTypeName) ? task : $"{task}<{friendlyTypeName}>";
             sb.AppendIndent().Append($"{taskWrapperTypeName} {method.Name}Async(");
-            var parameters = method.Parameters.Select(x => $"{x.Type.GetFriendlyTypeName()} {x.Name}");
+            var parameters = method
+                             .Parameters
+                             .Select(x => $"{x.Type.GetFriendlyTypeName()} {x.Name}{(string.IsNullOrEmpty(x.OptionalValue) ? string.Empty : $" = {x.OptionalValue}")}")
+                             .ToArray();
             sb.Append(string.Join(", ", parameters));
             sb.AppendLine(");");
         }
