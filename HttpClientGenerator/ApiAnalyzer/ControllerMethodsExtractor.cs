@@ -45,7 +45,10 @@ public static class ControllerMethodsExtractor
                             ? ParameterSource.Query
                             : attributesTypes.Contains(typeof(FromBodyAttribute))
                                 ? ParameterSource.Body
-                                : throw new ArgumentOutOfRangeException(nameof(parameterInfo), "Parameter should contain one of [From*] attributes"),
+                                : throw new ArgumentOutOfRangeException(
+                                    nameof(parameterInfo),
+                                    $"Parameter should contain one of [From*] attributes, method: {method.Name}"
+                                ),
                 };
             }
         ).ToArray();
