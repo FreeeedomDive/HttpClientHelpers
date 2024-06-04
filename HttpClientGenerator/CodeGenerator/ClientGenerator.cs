@@ -34,7 +34,7 @@ internal static class ClientGenerator
             sb.AppendIndent().Append($"public async {taskWrapperTypeName} {method.Name}Async(");
             var parameters = method
                              .Parameters
-                             .Select(x => $"{x.Type.GetFriendlyTypeName()} {x.Name}{(x.OptionalValue is null ? string.Empty : $" = {x.OptionalValue}")}")
+                             .Select(x => $"{x.Type.GetFriendlyTypeName()} {x.Name}{(string.IsNullOrEmpty(x.OptionalValue) ? string.Empty : $" = {x.OptionalValue}")}")
                              .ToArray();
             sb.Append(string.Join(", ", parameters))
               .AppendLine(")")
