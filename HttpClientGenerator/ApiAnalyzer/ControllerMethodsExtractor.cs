@@ -12,7 +12,7 @@ public static class ControllerMethodsExtractor
         var methods = GetApiMethodsFromControllers(controllerType);
         return methods.Length == 0
             ? Array.Empty<ApiMethodInfo>()
-            : methods.SelectMany(CollectApiMethodInfo).ToArray();
+            : methods.SelectMany(x => CollectApiMethodInfo(controllerType, x)).ToArray();
     }
 
     private static MethodInfo[] GetApiMethodsFromControllers(Type controllerType)
@@ -22,7 +22,7 @@ public static class ControllerMethodsExtractor
                              .ToArray();
     }
 
-    private static ApiMethodInfo[] CollectApiMethodInfo(MethodInfo method)
+    private static ApiMethodInfo[] CollectApiMethodInfo(Type controllerType, MethodInfo method)
     {
         var httpMethodAttribute = method.GetCustomAttribute<HttpMethodAttribute>();
         if (httpMethodAttribute is null)
@@ -35,9 +35,10 @@ public static class ControllerMethodsExtractor
             parameterInfo =>
             {
                 var attributesTypes = parameterInfo.CustomAttributes.Select(attr => attr.AttributeType).ToHashSet();
+                var parameterName = parameterInfo.Name ?? string.Empty;
                 return new ApiParameterInfo
                 {
-                    Name = parameterInfo.Name ?? "",
+                    Name = parameterName,
                     Type = GetInnerType(parameterInfo.ParameterType),
                     Source = attributesTypes.Contains(typeof(FromRouteAttribute))
                         ? ParameterSource.Route
@@ -46,16 +47,17 @@ public static class ControllerMethodsExtractor
                             : attributesTypes.Contains(typeof(FromBodyAttribute))
                                 ? ParameterSource.Body
                                 : throw new ArgumentOutOfRangeException(
-                                    nameof(parameterInfo),
-                                    $"Parameter should contain one of [From*] attributes, method: {method.Name}"
+                                    parameterName,
+                                    $"Parameter should contain one of [From*] attributes, method: {controllerType.Name}.{method.Name}"
                                 ),
+                    OptionalValue = parameterInfo.DefaultValue?.ToString(),
                 };
             }
         ).ToArray();
         return httpMethodAttribute.HttpMethods.Select(
             httpMethod => new ApiMethodInfo
             {
-                Name = method.Name,
+                Name = method.Name.Replace("Async", string.Empty),
                 HttpMethod = httpMethod,
                 RouteTemplate = httpMethodAttribute.Template ?? routeMethodAttribute?.Template ?? string.Empty,
                 Parameters = parameters,

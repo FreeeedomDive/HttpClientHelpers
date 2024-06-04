@@ -32,7 +32,10 @@ public static class ClientGenerator
             var isVoidReturn = string.IsNullOrEmpty(friendlyTypeName);
             var taskWrapperTypeName = isVoidReturn ? task : $"{task}<{friendlyTypeName}>";
             sb.AppendIndent().Append($"public async {taskWrapperTypeName} {method.Name}Async(");
-            var parameters = method.Parameters.Select(x => $"{x.Type.GetFriendlyTypeName()} {x.Name}");
+            var parameters = method
+                             .Parameters
+                             .Select(x => $"{x.Type.GetFriendlyTypeName()} {x.Name}{(x.OptionalValue is null ? string.Empty : $" = {x.OptionalValue}")}")
+                             .ToArray();
             sb.Append(string.Join(", ", parameters))
               .AppendLine(")")
               .AppendIndent().AppendLine("{")
