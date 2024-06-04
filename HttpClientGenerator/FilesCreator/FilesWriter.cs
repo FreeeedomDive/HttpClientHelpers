@@ -2,7 +2,7 @@
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.FilesCreator;
 
-public static class FilesWriter
+internal static class FilesWriter
 {
     public static void WriteFiles(string projectPath, GeneratedFileContent[] fileContents)
     {

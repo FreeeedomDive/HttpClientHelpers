@@ -4,7 +4,7 @@ using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.ApiAnalyzer;
 
-public static class ControllersExtractor
+internal static class ControllersExtractor
 {
     public static ApiControllerInfo[] ExtractAllFromType<TController>()
     {

@@ -1,6 +1,6 @@
 ﻿namespace Xdd.HttpHelpers.HttpClientGenerator.Models;
 
-public class ApiControllerInfo
+internal class ApiControllerInfo
 {
     public string Name { get; set; } = null!;
     public string Namespace { get; set; } = null!;

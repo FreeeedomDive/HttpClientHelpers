@@ -2,7 +2,7 @@
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.Extensions;
 
-public static class ApiControllerInfoExtensions
+internal static class ApiControllerInfoExtensions
 {
     public static string GetClientName(this ApiControllerInfo apiControllerInfo, bool isInterface = false)
     {

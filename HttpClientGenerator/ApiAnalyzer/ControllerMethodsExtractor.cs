@@ -5,7 +5,7 @@ using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.ApiAnalyzer;
 
-public static class ControllerMethodsExtractor
+internal static class ControllerMethodsExtractor
 {
     public static ApiMethodInfo[] Extract(Type controllerType)
     {

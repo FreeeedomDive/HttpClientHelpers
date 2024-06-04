@@ -2,7 +2,7 @@
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.Extensions;
 
-public static class StringBuilderExtensions
+internal static class StringBuilderExtensions
 {
     public static StringBuilder AppendIndent(this StringBuilder stringBuilder, int count = 1)
     {

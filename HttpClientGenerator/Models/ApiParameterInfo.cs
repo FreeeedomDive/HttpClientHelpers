@@ -1,6 +1,6 @@
 ﻿namespace Xdd.HttpHelpers.HttpClientGenerator.Models;
 
-public class ApiParameterInfo
+internal class ApiParameterInfo
 {
     public string Name { get; set; }
     public Type Type { get; set; }

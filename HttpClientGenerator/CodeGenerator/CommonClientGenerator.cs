@@ -4,7 +4,7 @@ using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
-public static class CommonClientGenerator
+internal static class CommonClientGenerator
 {
     public static GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos)
     {

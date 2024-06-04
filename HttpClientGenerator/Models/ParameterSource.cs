@@ -1,6 +1,6 @@
 ﻿namespace Xdd.HttpHelpers.HttpClientGenerator.Models;
 
-public enum ParameterSource
+internal enum ParameterSource
 {
     Route,
     Query,

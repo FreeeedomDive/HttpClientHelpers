@@ -1,6 +1,6 @@
 ﻿namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
-public class GeneratedFileContent
+internal class GeneratedFileContent
 {
     public string FileName { get; set; } = null!;
     public string? FolderName { get; set; } = null!;

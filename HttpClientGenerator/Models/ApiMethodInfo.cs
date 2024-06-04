@@ -1,6 +1,6 @@
 ﻿namespace Xdd.HttpHelpers.HttpClientGenerator.Models;
 
-public class ApiMethodInfo
+internal class ApiMethodInfo
 {
     public string Name { get; set; } = null!;
     public string HttpMethod { get; set; } = null!;

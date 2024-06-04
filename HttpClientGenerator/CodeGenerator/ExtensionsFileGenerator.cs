@@ -2,7 +2,7 @@
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
-public static class ExtensionsFileGenerator
+internal static class ExtensionsFileGenerator
 {
     public static GeneratedFileContent GenerateRestResponseExtensions(ApiControllerInfo apiControllerInfo)
     {

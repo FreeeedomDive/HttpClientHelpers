@@ -1,6 +1,6 @@
 ﻿namespace Xdd.HttpHelpers.HttpClientGenerator.Extensions;
 
-public static class TypeExtensions
+internal static class TypeExtensions
 {
     public static string GetFriendlyTypeName(this Type type)
     {
