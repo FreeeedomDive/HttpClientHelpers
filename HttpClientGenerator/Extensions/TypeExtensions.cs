@@ -2,7 +2,7 @@
 
 internal static class TypeExtensions
 {
-    public static string GetFriendlyTypeName(this Type type)
+    public static string GetFriendlyTypeName(this Type type, bool isNullable)
     {
         if (type == typeof(void))
         {
@@ -23,6 +23,6 @@ internal static class TypeExtensions
             genericTypeName = genericTypeName[..backtickIndex];
         }
 
-        return $"{genericTypeName}<{string.Join(", ", genericArguments.Select(GetFriendlyTypeName))}>";
+        return $"{genericTypeName}<{string.Join(", ", genericArguments.Select(x => GetFriendlyTypeName(x, isNullable)))}>";
     }
 }

@@ -28,13 +28,13 @@ internal static class ClientGenerator
         foreach (var method in apiControllerInfo.Methods)
         {
             const string task = "System.Threading.Tasks.Task";
-            var friendlyTypeName = method.ReturnType.GetFriendlyTypeName();
+            var friendlyTypeName = method.ReturnType.GetFriendlyTypeName(method.IsReturnTypeNullable);
             var isVoidReturn = string.IsNullOrEmpty(friendlyTypeName);
             var taskWrapperTypeName = isVoidReturn ? task : $"{task}<{friendlyTypeName}>";
             sb.AppendIndent().Append($"public async {taskWrapperTypeName} {method.Name}Async(");
             var parameters = method
                              .Parameters
-                             .Select(x => $"{x.Type.GetFriendlyTypeName()} {x.Name}{(string.IsNullOrEmpty(x.OptionalValue) ? string.Empty : $" = {x.OptionalValue}")}")
+                             .Select(x => $"{x.Type.GetFriendlyTypeName(x.IsNullable)} {x.Name}{(string.IsNullOrEmpty(x.OptionalValue) ? string.Empty : $" = {x.OptionalValue}")}")
                              .ToArray();
             sb.Append(string.Join(", ", parameters))
               .AppendLine(")")
@@ -68,7 +68,7 @@ internal static class ClientGenerator
             }
             else
             {
-                sb.AppendIndent(2).AppendLine($"return response.TryDeserialize<{method.ReturnType.GetFriendlyTypeName()}>();");
+                sb.AppendIndent(2).AppendLine($"return response.TryDeserialize<{method.ReturnType.GetFriendlyTypeName(method.IsReturnTypeNullable)}>();");
             }
 
             sb.AppendIndent().AppendLine("}").AppendLine();

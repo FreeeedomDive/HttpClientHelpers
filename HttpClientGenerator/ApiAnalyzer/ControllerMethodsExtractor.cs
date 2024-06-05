@@ -40,6 +40,7 @@ internal static class ControllerMethodsExtractor
                 {
                     Name = parameterName,
                     Type = GetInnerType(parameterInfo.ParameterType),
+                    IsNullable = IsNullable(parameterInfo),
                     Source = attributesTypes.Contains(typeof(FromRouteAttribute))
                         ? ParameterSource.Route
                         : attributesTypes.Contains(typeof(FromQueryAttribute))
@@ -62,6 +63,7 @@ internal static class ControllerMethodsExtractor
                 RouteTemplate = httpMethodAttribute.Template ?? routeMethodAttribute?.Template ?? string.Empty,
                 Parameters = parameters,
                 ReturnType = GetInnerType(method.ReturnType),
+                IsReturnTypeNullable = IsNullable(method.ReturnParameter),
             }
         ).ToArray();
     }
@@ -99,5 +101,10 @@ internal static class ControllerMethodsExtractor
         }
 
         return type;
+    }
+
+    private static bool IsNullable(ParameterInfo p)
+    {
+        return new NullabilityInfoContext().Create(p).WriteState is NullabilityState.Nullable;
     }
 }

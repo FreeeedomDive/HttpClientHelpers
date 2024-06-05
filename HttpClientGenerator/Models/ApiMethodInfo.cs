@@ -7,4 +7,5 @@ internal class ApiMethodInfo
     public string RouteTemplate { get; set; } = null!;
     public ApiParameterInfo[] Parameters { get; set; } = null!;
     public Type ReturnType { get; set; } = null!;
+    public bool IsReturnTypeNullable { get; set; }
 }

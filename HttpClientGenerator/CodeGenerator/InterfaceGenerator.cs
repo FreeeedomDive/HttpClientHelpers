@@ -18,12 +18,12 @@ internal static class InterfaceGenerator
         foreach (var method in apiControllerInfo.Methods)
         {
             const string task = "System.Threading.Tasks.Task";
-            var friendlyTypeName = method.ReturnType.GetFriendlyTypeName();
+            var friendlyTypeName = method.ReturnType.GetFriendlyTypeName(method.IsReturnTypeNullable);
             var taskWrapperTypeName = string.IsNullOrEmpty(friendlyTypeName) ? task : $"{task}<{friendlyTypeName}>";
             sb.AppendIndent().Append($"{taskWrapperTypeName} {method.Name}Async(");
             var parameters = method
                              .Parameters
-                             .Select(x => $"{x.Type.GetFriendlyTypeName()} {x.Name}{(string.IsNullOrEmpty(x.OptionalValue) ? string.Empty : $" = {x.OptionalValue}")}")
+                             .Select(x => $"{x.Type.GetFriendlyTypeName(x.IsNullable)} {x.Name}{(string.IsNullOrEmpty(x.OptionalValue) ? string.Empty : $" = {x.OptionalValue}")}")
                              .ToArray();
             sb.Append(string.Join(", ", parameters));
             sb.AppendLine(");");
