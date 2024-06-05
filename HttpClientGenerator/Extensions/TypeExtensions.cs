@@ -11,7 +11,7 @@ internal static class TypeExtensions
 
         if (!type.IsGenericType)
         {
-            return $"{type.Namespace}.{type.Name}";
+            return $"{type.Namespace}.{type.Name}{(isNullable ? "?" : string.Empty)}";
         }
 
         var genericTypeDefinition = type.GetGenericTypeDefinition();
