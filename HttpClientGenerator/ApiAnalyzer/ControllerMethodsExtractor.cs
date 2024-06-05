@@ -73,7 +73,7 @@ internal static class ControllerMethodsExtractor
         // Handle Task<T>
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>))
         {
-            type = type.GetGenericArguments()[0];
+            return GetInnerType(type.GetGenericArguments()[0]);
         }
 
         // Handle Task
@@ -85,13 +85,19 @@ internal static class ControllerMethodsExtractor
         // Handle ActionResult<T>
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ActionResult<>))
         {
-            type = type.GetGenericArguments()[0];
+            return GetInnerType(type.GetGenericArguments()[0]);
         }
 
         // Handle ActionResult
         else if (type == typeof(ActionResult))
         {
             return typeof(void);
+        }
+
+        // Handle Nullable<T>
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+        {
+            return GetInnerType(type.GetGenericArguments()[0]);
         }
 
         // If the resulting type is still a Task or ActionResult, recursively unwrap it
