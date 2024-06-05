@@ -51,7 +51,7 @@ internal static class ControllerMethodsExtractor
                                     parameterName,
                                     $"Parameter should contain one of [From*] attributes, method: {controllerType.Name}.{method.Name}"
                                 ),
-                    OptionalValue = parameterInfo.DefaultValue?.ToString(),
+                    OptionalValue = parameterInfo.IsOptional ? parameterInfo.DefaultValue is null ? "null" : parameterInfo.DefaultValue.ToString() : null,
                 };
             }
         ).ToArray();
