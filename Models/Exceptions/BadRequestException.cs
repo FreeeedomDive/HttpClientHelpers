@@ -4,6 +4,10 @@ namespace Xdd.HttpHelpers.Models.Exceptions;
 
 public class BadRequestException : HttpResponseExceptionBase
 {
+    public BadRequestException() : base(string.Empty)
+    {
+    }
+
     public BadRequestException(string message) : base(message)
     {
     }

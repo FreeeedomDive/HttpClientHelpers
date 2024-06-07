@@ -4,6 +4,10 @@ namespace Xdd.HttpHelpers.Models.Exceptions;
 
 public class ConflictException : HttpResponseExceptionBase
 {
+    public ConflictException() : base(string.Empty)
+    {
+    }
+
     public ConflictException(string message) : base(message)
     {
     }

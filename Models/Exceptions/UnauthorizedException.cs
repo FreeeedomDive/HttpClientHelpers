@@ -4,6 +4,10 @@ namespace Xdd.HttpHelpers.Models.Exceptions;
 
 public class UnauthorizedException : HttpResponseExceptionBase
 {
+    public UnauthorizedException() : base(string.Empty)
+    {
+    }
+
     public UnauthorizedException(string message) : base(message)
     {
     }

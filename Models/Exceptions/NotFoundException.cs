@@ -4,6 +4,10 @@ namespace Xdd.HttpHelpers.Models.Exceptions;
 
 public class NotFoundException : HttpResponseExceptionBase
 {
+    public NotFoundException() : base(string.Empty)
+    {
+    }
+
     public NotFoundException(string message) : base(message)
     {
     }
