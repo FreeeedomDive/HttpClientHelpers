@@ -1,17 +1,18 @@
 ﻿using System.Text;
 using Xdd.HttpHelpers.HttpClientGenerator.Extensions;
 using Xdd.HttpHelpers.HttpClientGenerator.Models;
+using Xdd.HttpHelpers.HttpClientGenerator.Options;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
 internal class InterfaceGenerator : IInterfaceGenerator
 {
-    public GeneratedFileContent Generate(ApiControllerInfo apiControllerInfo)
+    public GeneratedFileContent Generate(ApiControllerInfo apiControllerInfo, GeneratorOptions options)
     {
         var interfaceName = apiControllerInfo.GetClientName(true);
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
-                 .AppendLine($"namespace {apiControllerInfo.Namespace}.Client.{apiControllerInfo.Name};")
+                 .AppendLine($"namespace {options.ClientNamespace}.{apiControllerInfo.Name};")
                  .AppendLine()
                  .AppendLine($"public interface {interfaceName}")
                  .AppendLine("{");

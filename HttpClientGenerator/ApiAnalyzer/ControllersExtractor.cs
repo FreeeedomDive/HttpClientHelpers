@@ -12,12 +12,11 @@ internal class ControllersExtractor : IControllersExtractor
         this.controllerMethodsExtractor = controllerMethodsExtractor;
     }
 
-    public ApiControllerInfo[] ExtractAllFromType<TController>(GeneratorOptions options)
+    public ApiControllerInfo[] ExtractAllFromType<TController>()
     {
         var assembly = typeof(TController).Assembly;
-        var @namespace = options.ClientNamespace ?? assembly.GetName().Name ?? string.Empty;
         var controllers = GetAllControllersFromAssembly(assembly);
-        return controllers.Select(x => GetApiControllerInfo(x, @namespace)).Where(x => x is not null).Select(x => x!).ToArray();
+        return controllers.Select(GetApiControllerInfo).Where(x => x is not null).Select(x => x!).ToArray();
     }
 
     private static Type[] GetAllControllersFromAssembly(Assembly assembly)
@@ -28,7 +27,7 @@ internal class ControllersExtractor : IControllersExtractor
                .ToArray();
     }
 
-    private ApiControllerInfo? GetApiControllerInfo(Type controllerType, string commonNamespace)
+    private ApiControllerInfo? GetApiControllerInfo(Type controllerType)
     {
         var methods = controllerMethodsExtractor.Extract(controllerType);
         if (methods.Length == 0)
@@ -40,7 +39,6 @@ internal class ControllersExtractor : IControllersExtractor
         return new ApiControllerInfo
         {
             Name = controllerType.Name.Replace("Controller", string.Empty),
-            Namespace = commonNamespace,
             RouteTemplate = routeMethodAttribute?.Template ?? string.Empty,
             Methods = methods,
         };

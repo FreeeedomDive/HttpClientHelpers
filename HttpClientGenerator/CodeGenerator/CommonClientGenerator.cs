@@ -7,20 +7,19 @@ namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
 internal class CommonClientGenerator : ICommonClientGenerator
 {
-    public GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos, GeneratorOptions options)
+    public GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos, string apiProjectName, GeneratorOptions options)
     {
-        var commonNamespace = apiControllerInfos.First().Namespace;
-        var clientName = options.ClientName ?? $"{commonNamespace.Replace(".", string.Empty)}Client";
+        var clientName = options.ClientName ?? $"{apiProjectName.Replace(".", string.Empty)}Client";
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
                  .AppendLine();
         foreach (var apiControllerInfo in apiControllerInfos)
         {
-            sb.AppendLine($"using {commonNamespace}.Client.{apiControllerInfo.Name};");
+            sb.AppendLine($"using {options.ClientNamespace}.{apiControllerInfo.Name};");
         }
 
         sb.AppendLine()
-          .AppendLine($"namespace {commonNamespace}.Client;")
+          .AppendLine($"namespace {options.ClientNamespace};")
           .AppendLine()
           .AppendLine($"public class {clientName} : I{clientName}")
           .AppendLine("{")

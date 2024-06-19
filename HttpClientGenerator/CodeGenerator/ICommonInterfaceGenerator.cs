@@ -5,5 +5,5 @@ namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
 internal interface ICommonInterfaceGenerator
 {
-    GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos, GeneratorOptions options);
+    GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos, string apiProjectName, GeneratorOptions options);
 }

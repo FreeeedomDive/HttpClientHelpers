@@ -7,20 +7,19 @@ namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
 internal class CommonInterfaceGenerator : ICommonInterfaceGenerator
 {
-    public GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos, GeneratorOptions options)
+    public GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos, string apiProjectName, GeneratorOptions options)
     {
-        var commonNamespace = apiControllerInfos.First().Namespace;
-        var interfaceName = options.InterfaceName ?? $"I{commonNamespace.Replace(".", string.Empty)}Client";
+        var interfaceName = options.InterfaceName ?? $"I{apiProjectName.Replace(".", string.Empty)}";
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
                  .AppendLine();
         foreach (var apiControllerInfo in apiControllerInfos)
         {
-            sb.AppendLine($"using {commonNamespace}.Client.{apiControllerInfo.Name};");
+            sb.AppendLine($"using {options.ClientNamespace}.{apiControllerInfo.Name};");
         }
 
         sb.AppendLine()
-          .AppendLine($"namespace {commonNamespace}.Client;")
+          .AppendLine($"namespace {options.ClientNamespace};")
           .AppendLine().AppendLine($"public interface {interfaceName}")
           .AppendLine("{");
         foreach (var apiControllerInfo in apiControllerInfos)

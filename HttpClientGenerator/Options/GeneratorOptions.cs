@@ -10,7 +10,7 @@ public class GeneratorOptions
     /// <summary>
     ///     Base namespace for client, it could be your client's project name (example Weather.Api.Client)
     /// </summary>
-    public string? ClientNamespace { get; set; }
+    public string ClientNamespace { get; set; } = null!;
 
     /// <summary>
     ///     Base client name (example WeatherApiClient)

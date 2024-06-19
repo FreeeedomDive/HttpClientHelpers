@@ -2,12 +2,13 @@
 using System.Text.RegularExpressions;
 using Xdd.HttpHelpers.HttpClientGenerator.Extensions;
 using Xdd.HttpHelpers.HttpClientGenerator.Models;
+using Xdd.HttpHelpers.HttpClientGenerator.Options;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
 internal class ClientGenerator : IClientGenerator
 {
-    public GeneratedFileContent Generate(ApiControllerInfo apiControllerInfo)
+    public GeneratedFileContent Generate(ApiControllerInfo apiControllerInfo, GeneratorOptions options)
     {
         var className = apiControllerInfo.GetClientName();
         var sb = new StringBuilder()
@@ -15,7 +16,7 @@ internal class ClientGenerator : IClientGenerator
                  .AppendLine("using RestSharp;")
                  .AppendLine("using Xdd.HttpHelpers.Models.Extensions;")
                  .AppendLine()
-                 .AppendLine($"namespace {apiControllerInfo.Namespace}.Client.{apiControllerInfo.Name};")
+                 .AppendLine($"namespace {options.ClientNamespace}.{apiControllerInfo.Name};")
                  .AppendLine()
                  .AppendLine($"public class {className} : {apiControllerInfo.GetClientName(true)}")
                  .AppendLine("{")
