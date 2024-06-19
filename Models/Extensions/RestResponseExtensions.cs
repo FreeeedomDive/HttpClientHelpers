@@ -18,10 +18,12 @@ public static class RestResponseExtensions
             throw new Exception("Content is null");
         }
 
-        var knownApiException = JsonConvert.DeserializeObject<HttpResponseExceptionBase>(restResponse.Content, new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.All,
-        });
+        var knownApiException = JsonConvert.DeserializeObject<HttpResponseExceptionBase>(
+            restResponse.Content, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All,
+            }
+        );
         throw knownApiException ?? new InternalServerErrorException("Unknown API error");
     }
 
@@ -35,10 +37,12 @@ public static class RestResponseExtensions
 
         try
         {
-            var response = JsonConvert.DeserializeObject<T>(restResponse.Content, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All,
-            });
+            var response = JsonConvert.DeserializeObject<T>(
+                restResponse.Content, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All,
+                }
+            );
             if (response == null)
             {
                 throw new Exception($"Can not deserialize response as {typeof(T).Name}");

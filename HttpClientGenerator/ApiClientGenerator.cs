@@ -8,24 +8,34 @@ public static class ApiClientGenerator
 {
     public static void Generate<TController>(string projectPath)
     {
-        var controllersInfo = ControllersExtractor.ExtractAllFromType<TController>();
+        IControllerMethodsExtractor controllerMethodsExtractor = new ControllerMethodsExtractor();
+        IControllersExtractor controllersExtractor = new ControllersExtractor(controllerMethodsExtractor);
+        var controllersInfo = controllersExtractor.ExtractAllFromType<TController>();
         if (controllersInfo.Length == 0)
         {
             Console.WriteLine("No controllers were detected");
             return;
         }
 
-        var commonInterfaceFileContent = CommonInterfaceGenerator.Generate(controllersInfo);
-        var commonClientFileContent = CommonClientGenerator.Generate(controllersInfo);
+        ICommonInterfaceGenerator commonInterfaceGenerator = new CommonInterfaceGenerator();
+        var commonInterfaceFileContent = commonInterfaceGenerator.Generate(controllersInfo);
+
+        ICommonClientGenerator commonClientGenerator = new CommonClientGenerator();
+        var commonClientFileContent = commonClientGenerator.Generate(controllersInfo);
+
+        IInterfaceGenerator interfaceGenerator = new InterfaceGenerator();
+        IClientGenerator clientGenerator = new ClientGenerator();
         var clientsFilesContent = controllersInfo.SelectMany(
             x => new[]
             {
-                InterfaceGenerator.Generate(x),
-                ClientGenerator.Generate(x),
+                interfaceGenerator.Generate(x),
+                clientGenerator.Generate(x),
             }
         ).ToArray();
 
-        FilesWriter.WriteFiles(projectPath, clientsFilesContent.Concat(new []{commonInterfaceFileContent, commonClientFileContent}).ToArray());
+        IFilesWriter filesWriter = new FilesWriter();
+        filesWriter.WriteFiles(projectPath, clientsFilesContent.Concat(new[] { commonInterfaceFileContent, commonClientFileContent }).ToArray());
+
         Console.WriteLine($"Generated {controllersInfo.Length} clients for project {controllersInfo.First().Namespace}");
         Console.WriteLine("Make sure to install following NuGet packages to your project with generated clients: RestSharp, Xdd.HttpHelpers.HttpClientGenerator");
     }

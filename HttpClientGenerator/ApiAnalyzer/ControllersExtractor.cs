@@ -4,9 +4,14 @@ using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.ApiAnalyzer;
 
-internal static class ControllersExtractor
+internal class ControllersExtractor : IControllersExtractor
 {
-    public static ApiControllerInfo[] ExtractAllFromType<TController>()
+    public ControllersExtractor(IControllerMethodsExtractor controllerMethodsExtractor)
+    {
+        this.controllerMethodsExtractor = controllerMethodsExtractor;
+    }
+
+    public ApiControllerInfo[] ExtractAllFromType<TController>()
     {
         var assembly = typeof(TController).Assembly;
         var name = assembly.GetName();
@@ -22,9 +27,9 @@ internal static class ControllersExtractor
                .ToArray();
     }
 
-    private static ApiControllerInfo? GetApiControllerInfo(Type controllerType, string commonNamespace)
+    private ApiControllerInfo? GetApiControllerInfo(Type controllerType, string commonNamespace)
     {
-        var methods = ControllerMethodsExtractor.Extract(controllerType);
+        var methods = controllerMethodsExtractor.Extract(controllerType);
         if (methods.Length == 0)
         {
             return null;
@@ -39,4 +44,6 @@ internal static class ControllersExtractor
             Methods = methods,
         };
     }
+
+    private readonly IControllerMethodsExtractor controllerMethodsExtractor;
 }

@@ -5,9 +5,9 @@ using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
-internal static class ClientGenerator
+internal class ClientGenerator : IClientGenerator
 {
-    public static GeneratedFileContent Generate(ApiControllerInfo apiControllerInfo)
+    public GeneratedFileContent Generate(ApiControllerInfo apiControllerInfo)
     {
         var className = apiControllerInfo.GetClientName();
         var sb = new StringBuilder()

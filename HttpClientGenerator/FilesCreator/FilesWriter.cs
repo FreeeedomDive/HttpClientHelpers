@@ -2,14 +2,13 @@
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.FilesCreator;
 
-internal static class FilesWriter
+internal class FilesWriter : IFilesWriter
 {
-    public static void WriteFiles(string projectPath, GeneratedFileContent[] fileContents)
+    public void WriteFiles(string projectPath, GeneratedFileContent[] fileContents)
     {
         foreach (var fileContent in fileContents)
         {
             var directoryPath = Path.Join(projectPath, fileContent.FolderName);
-            var directory = new DirectoryInfo(directoryPath);
             if (!Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);

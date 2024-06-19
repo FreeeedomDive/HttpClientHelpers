@@ -4,15 +4,15 @@ using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
-internal static class CommonClientGenerator
+internal class CommonClientGenerator : ICommonClientGenerator
 {
-    public static GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos)
+    public GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos)
     {
         var commonNamespace = apiControllerInfos.First().Namespace;
         var clientName = $"{commonNamespace.Replace(".", string.Empty)}Client";
         var sb = new StringBuilder()
-            .AppendLine("/* Generated file */")
-            .AppendLine();
+                 .AppendLine("/* Generated file */")
+                 .AppendLine();
         foreach (var apiControllerInfo in apiControllerInfos)
         {
             sb.AppendLine($"using {commonNamespace}.Client.{apiControllerInfo.Name};");

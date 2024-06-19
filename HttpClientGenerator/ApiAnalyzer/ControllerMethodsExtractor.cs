@@ -5,9 +5,9 @@ using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.ApiAnalyzer;
 
-internal static class ControllerMethodsExtractor
+internal class ControllerMethodsExtractor : IControllerMethodsExtractor
 {
-    public static ApiMethodInfo[] Extract(Type controllerType)
+    public ApiMethodInfo[] Extract(Type controllerType)
     {
         var methods = GetApiMethodsFromControllers(controllerType);
         return methods.Length == 0
@@ -77,7 +77,7 @@ internal static class ControllerMethodsExtractor
         }
 
         // Handle Task
-        else if (type == typeof(Task))
+        if (type == typeof(Task))
         {
             return typeof(void);
         }
@@ -89,7 +89,7 @@ internal static class ControllerMethodsExtractor
         }
 
         // Handle ActionResult
-        else if (type == typeof(ActionResult))
+        if (type == typeof(ActionResult))
         {
             return typeof(void);
         }

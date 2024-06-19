@@ -4,9 +4,9 @@ using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
-internal static class CommonInterfaceGenerator
+internal class CommonInterfaceGenerator : ICommonInterfaceGenerator
 {
-    public static GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos)
+    public GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos)
     {
         var commonNamespace = apiControllerInfos.First().Namespace;
         var interfaceName = $"I{commonNamespace.Replace(".", string.Empty)}Client";

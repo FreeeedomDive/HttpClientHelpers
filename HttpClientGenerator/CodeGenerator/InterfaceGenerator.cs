@@ -4,9 +4,9 @@ using Xdd.HttpHelpers.HttpClientGenerator.Models;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.CodeGenerator;
 
-internal static class InterfaceGenerator
+internal class InterfaceGenerator : IInterfaceGenerator
 {
-    public static GeneratedFileContent Generate(ApiControllerInfo apiControllerInfo)
+    public GeneratedFileContent Generate(ApiControllerInfo apiControllerInfo)
     {
         var interfaceName = apiControllerInfo.GetClientName(true);
         var sb = new StringBuilder()
