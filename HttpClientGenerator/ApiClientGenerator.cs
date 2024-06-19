@@ -23,10 +23,10 @@ public static class ApiClientGenerator
         }
 
         ICommonInterfaceGenerator commonInterfaceGenerator = new CommonInterfaceGenerator();
-        var commonInterfaceFileContent = commonInterfaceGenerator.Generate(controllersInfo, options);
+        var commonInterfaceFileContent = commonInterfaceGenerator.Generate(controllersInfo, apiProjectName, options);
 
         ICommonClientGenerator commonClientGenerator = new CommonClientGenerator();
-        var commonClientFileContent = commonClientGenerator.Generate(controllersInfo, options);
+        var commonClientFileContent = commonClientGenerator.Generate(controllersInfo, apiProjectName, options);
 
         IInterfaceGenerator interfaceGenerator = new InterfaceGenerator();
         IClientGenerator clientGenerator = new ClientGenerator();
