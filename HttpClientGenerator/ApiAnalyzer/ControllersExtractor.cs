@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Xdd.HttpHelpers.HttpClientGenerator.Models;
+using Xdd.HttpHelpers.HttpClientGenerator.Options;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.ApiAnalyzer;
 
@@ -11,12 +12,12 @@ internal class ControllersExtractor : IControllersExtractor
         this.controllerMethodsExtractor = controllerMethodsExtractor;
     }
 
-    public ApiControllerInfo[] ExtractAllFromType<TController>()
+    public ApiControllerInfo[] ExtractAllFromType<TController>(GeneratorOptions options)
     {
         var assembly = typeof(TController).Assembly;
-        var name = assembly.GetName();
+        var @namespace = options.ClientNamespace ?? assembly.GetName().Name ?? string.Empty;
         var controllers = GetAllControllersFromAssembly(assembly);
-        return controllers.Select(x => GetApiControllerInfo(x, name.Name ?? string.Empty)).Where(x => x is not null).Select(x => x!).ToArray();
+        return controllers.Select(x => GetApiControllerInfo(x, @namespace)).Where(x => x is not null).Select(x => x!).ToArray();
     }
 
     private static Type[] GetAllControllersFromAssembly(Assembly assembly)
