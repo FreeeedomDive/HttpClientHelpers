@@ -9,7 +9,7 @@ internal class CommonInterfaceGenerator : ICommonInterfaceGenerator
 {
     public GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos, string apiProjectName, GeneratorOptions options)
     {
-        var interfaceName = options.InterfaceName ?? $"I{apiProjectName.Replace(".", string.Empty)}";
+        var interfaceName = options.InterfaceName ?? $"I{apiProjectName.Replace(".", string.Empty)}Client";
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
                  .AppendLine();

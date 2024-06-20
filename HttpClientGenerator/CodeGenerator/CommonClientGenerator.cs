@@ -10,6 +10,7 @@ internal class CommonClientGenerator : ICommonClientGenerator
     public GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos, string apiProjectName, GeneratorOptions options)
     {
         var clientName = options.ClientName ?? $"{apiProjectName.Replace(".", string.Empty)}Client";
+        var interfaceName = options.InterfaceName ?? $"I{clientName}";
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
                  .AppendLine();
@@ -21,7 +22,7 @@ internal class CommonClientGenerator : ICommonClientGenerator
         sb.AppendLine()
           .AppendLine($"namespace {options.ClientNamespace};")
           .AppendLine()
-          .AppendLine($"public class {clientName} : I{clientName}")
+          .AppendLine($"public class {clientName} : {interfaceName}")
           .AppendLine("{")
           .AppendIndent().AppendLine($"public {clientName}(RestSharp.RestClient restClient)")
           .AppendIndent().AppendLine("{");
