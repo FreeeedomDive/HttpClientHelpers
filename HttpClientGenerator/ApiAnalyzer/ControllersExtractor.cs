@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Xdd.HttpHelpers.HttpClientGenerator.Models;
-using Xdd.HttpHelpers.HttpClientGenerator.Options;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.ApiAnalyzer;
 

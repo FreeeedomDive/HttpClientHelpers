@@ -13,16 +13,17 @@ internal class ClientGenerator : IClientGenerator
         var className = apiControllerInfo.GetClientName();
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
-                 .AppendLine("using RestSharp;")
                  .AppendLine("using Xdd.HttpHelpers.Models.Extensions;")
+                 .AppendLine("using Xdd.HttpHelpers.Models.Requests;")
+                 .AppendLine("using Xdd.HttpHelpers.Models.Requests.Parameters;")
                  .AppendLine()
                  .AppendLine($"namespace {options.ClientNamespace}.{apiControllerInfo.Name};")
                  .AppendLine()
                  .AppendLine($"public class {className} : {apiControllerInfo.GetClientName(true)}")
                  .AppendLine("{")
-                 .AppendIndent().AppendLine($"public {className}(RestSharp.RestClient restClient)")
+                 .AppendIndent().AppendLine($"public {className}(RestSharp.RestClient client)")
                  .AppendIndent().AppendLine("{")
-                 .AppendIndent(2).AppendLine("this.restClient = restClient;")
+                 .AppendIndent(2).AppendLine("this.client = client;")
                  .AppendIndent().AppendLine("}")
                  .AppendLine();
 
@@ -41,41 +42,37 @@ internal class ClientGenerator : IClientGenerator
               .AppendLine(")")
               .AppendIndent().AppendLine("{")
               .AppendIndent(2)
-              .Append("var request = new RestRequest(\"")
-              .Append($"{RemoveTypeConstraintsFromRoute(apiControllerInfo.RouteTemplate)}/{RemoveTypeConstraintsFromRoute(method.RouteTemplate)}")
-              .AppendLine($"\", Method.{method.HttpMethod[0] + method.HttpMethod[1..].ToLower()});");
+              .Append("var requestBuilder = new RequestBuilder(\"")
+              .Append($"${RemoveTypeConstraintsFromRoute(apiControllerInfo.RouteTemplate)}/{RemoveTypeConstraintsFromRoute(method.RouteTemplate)}")
+              .AppendLine($"\", HttpMethod.{method.HttpMethod.ToUpper()});");
             foreach (var parameter in method.Parameters)
             {
                 switch (parameter.Source)
                 {
-                    case ParameterSource.Route:
-                        sb.AppendIndent(2).AppendLine($"request.AddUrlSegment(\"{parameter.Name}\", {parameter.Name});");
-                        break;
                     case ParameterSource.Query:
-                        sb.AppendIndent(2).AppendLine($"request.AddQueryParameter(\"{parameter.Name}\", {parameter.Name}.ToString());");
+                        sb.AppendIndent(2).AppendLine($"requestBuilder.WithQueryParameter(\"{parameter.Name}\", {parameter.Name});");
                         break;
                     case ParameterSource.Body:
-                        sb.AppendIndent(2).AppendLine($"request.AddJsonBody({parameter.Name});");
+                        sb.AppendIndent(2).AppendLine($"requestBuilder.WithJsonBody({parameter.Name});");
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
 
-            sb.AppendIndent(2).AppendLine("var response = await restClient.ExecuteAsync(request);");
             if (isVoidReturn)
             {
-                sb.AppendIndent(2).AppendLine("response.ThrowIfNotSuccessful();");
+                sb.AppendIndent(2).AppendLine("await client.MakeRequestAsync(requestBuilder.Build());");
             }
             else
             {
-                sb.AppendIndent(2).AppendLine($"return response.TryDeserialize<{method.ReturnType.GetFriendlyTypeName(method.IsReturnTypeNullable)}>();");
+                sb.AppendIndent(2).AppendLine($"return await client.MakeRequestAsync<{method.ReturnType.GetFriendlyTypeName(method.IsReturnTypeNullable)}>(requestBuilder.Build());");
             }
 
             sb.AppendIndent().AppendLine("}").AppendLine();
         }
 
-        sb.AppendIndent().AppendLine("private readonly RestSharp.RestClient restClient;")
+        sb.AppendIndent().AppendLine("private readonly RestSharp.RestClient client;")
           .AppendLine("}");
         return new GeneratedFileContent
         {

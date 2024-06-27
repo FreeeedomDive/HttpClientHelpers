@@ -1,40 +1,42 @@
 ﻿using Newtonsoft.Json;
-using RestSharp;
 using Xdd.HttpHelpers.Models.Exceptions;
 
 namespace Xdd.HttpHelpers.Models.Extensions;
 
-public static class RestResponseExtensions
+public static class HttpResponseMessageExtensions
 {
-    public static void ThrowIfNotSuccessful(this RestResponse restResponse)
+    public static async Task ThrowIfNotSuccessfulAsync(this HttpResponseMessage httpResponseMessage)
     {
-        if (restResponse.IsSuccessful)
+        if (httpResponseMessage.IsSuccessStatusCode)
         {
             return;
         }
 
-        if (restResponse.Content == null)
+        var content = await httpResponseMessage.Content.ReadAsStringAsync();
+        if (content is null)
         {
             throw new Exception("Content is null");
         }
 
         var knownApiException = JsonConvert.DeserializeObject<HttpResponseExceptionBase>(
-            restResponse.Content, new JsonSerializerSettings
+            content, new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.All,
             }
         );
+
         throw knownApiException ?? new InternalServerErrorException("Unknown API error");
     }
 
-    public static T TryDeserialize<T>(this RestResponse restResponse)
+    public static async Task<T> TryDeserializeAsync<T>(this HttpResponseMessage httpResponseMessage)
     {
-        ThrowIfNotSuccessful(restResponse);
+        await ThrowIfNotSuccessfulAsync(httpResponseMessage);
 
+        var content = await httpResponseMessage.Content.ReadAsStringAsync();
         try
         {
             var response = JsonConvert.DeserializeObject<T>(
-                restResponse.Content!, new JsonSerializerSettings
+                content, new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.All,
                 }
