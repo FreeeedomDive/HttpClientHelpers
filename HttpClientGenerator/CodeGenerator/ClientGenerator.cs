@@ -13,9 +13,10 @@ internal class ClientGenerator : IClientGenerator
         var className = apiControllerInfo.GetClientName();
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
+                 .AppendLine("using System.Threading.Tasks;")
+                 .AppendLine()
                  .AppendLine("using Xdd.HttpHelpers.Models.Extensions;")
                  .AppendLine("using Xdd.HttpHelpers.Models.Requests;")
-                 .AppendLine("using Xdd.HttpHelpers.Models.Requests.Parameters;")
                  .AppendLine()
                  .AppendLine($"namespace {options.ClientNamespace}.{apiControllerInfo.Name};")
                  .AppendLine()
@@ -29,7 +30,7 @@ internal class ClientGenerator : IClientGenerator
 
         foreach (var method in apiControllerInfo.Methods)
         {
-            const string task = "System.Threading.Tasks.Task";
+            const string task = "Task";
             var friendlyTypeName = method.ReturnType.GetFriendlyTypeName(method.IsReturnTypeNullable);
             var isVoidReturn = string.IsNullOrEmpty(friendlyTypeName);
             var taskWrapperTypeName = isVoidReturn ? task : $"{task}<{friendlyTypeName}>";
@@ -42,9 +43,9 @@ internal class ClientGenerator : IClientGenerator
               .AppendLine(")")
               .AppendIndent().AppendLine("{")
               .AppendIndent(2)
-              .Append("var requestBuilder = new RequestBuilder(\"")
-              .Append($"${RemoveTypeConstraintsFromRoute(apiControllerInfo.RouteTemplate)}/{RemoveTypeConstraintsFromRoute(method.RouteTemplate)}")
-              .AppendLine($"\", HttpMethod.{method.HttpMethod.ToUpper()});");
+              .Append("var requestBuilder = new RequestBuilder($\"")
+              .Append($"{RemoveTypeConstraintsFromRoute(apiControllerInfo.RouteTemplate)}/{RemoveTypeConstraintsFromRoute(method.RouteTemplate)}")
+              .AppendLine($"\", HttpRequestMethod.{method.HttpMethod.ToUpper()});");
             foreach (var parameter in method.Parameters)
             {
                 switch (parameter.Source)
@@ -55,8 +56,6 @@ internal class ClientGenerator : IClientGenerator
                     case ParameterSource.Body:
                         sb.AppendIndent(2).AppendLine($"requestBuilder.WithJsonBody({parameter.Name});");
                         break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
                 }
             }
 

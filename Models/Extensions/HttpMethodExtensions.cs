@@ -1,20 +1,20 @@
 ﻿using RestSharp;
-using HttpMethod = Xdd.HttpHelpers.Models.Requests.HttpMethod;
+using Xdd.HttpHelpers.Models.Requests;
 
 namespace Xdd.HttpHelpers.Models.Extensions;
 
 public static class HttpMethodExtensions
 {
-    public static Method ToRestSharpMethod(this HttpMethod httpMethod)
+    public static Method ToRestSharpMethod(this HttpRequestMethod httpRequestMethod)
     {
-        return httpMethod switch
+        return httpRequestMethod switch
         {
-            HttpMethod.GET => Method.Get,
-            HttpMethod.POST => Method.Post,
-            HttpMethod.PUT => Method.Put,
-            HttpMethod.DELETE => Method.Delete,
-            HttpMethod.PATCH => Method.Patch,
-            _ => throw new ArgumentOutOfRangeException(nameof(httpMethod), httpMethod, null),
+            HttpRequestMethod.GET => Method.Get,
+            HttpRequestMethod.POST => Method.Post,
+            HttpRequestMethod.PUT => Method.Put,
+            HttpRequestMethod.DELETE => Method.Delete,
+            HttpRequestMethod.PATCH => Method.Patch,
+            _ => throw new ArgumentOutOfRangeException(nameof(httpRequestMethod), httpRequestMethod, null),
         };
     }
 }

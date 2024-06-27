@@ -12,13 +12,15 @@ internal class InterfaceGenerator : IInterfaceGenerator
         var interfaceName = apiControllerInfo.GetClientName(true);
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
+                 .AppendLine("using System.Threading.Tasks;")
+                 .AppendLine()
                  .AppendLine($"namespace {options.ClientNamespace}.{apiControllerInfo.Name};")
                  .AppendLine()
                  .AppendLine($"public interface {interfaceName}")
                  .AppendLine("{");
         foreach (var method in apiControllerInfo.Methods)
         {
-            const string task = "System.Threading.Tasks.Task";
+            const string task = "Task";
             var friendlyTypeName = method.ReturnType.GetFriendlyTypeName(method.IsReturnTypeNullable);
             var taskWrapperTypeName = string.IsNullOrEmpty(friendlyTypeName) ? task : $"{task}<{friendlyTypeName}>";
             sb.AppendIndent().Append($"{taskWrapperTypeName} {method.Name}Async(");

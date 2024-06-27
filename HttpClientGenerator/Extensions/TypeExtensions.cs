@@ -9,9 +9,15 @@ internal static class TypeExtensions
             return string.Empty;
         }
 
+        var nullablePart = isNullable ? "?" : string.Empty;
+        if (Keywords.TryGetValue(type, out var keyword) && !string.IsNullOrEmpty(keyword))
+        {
+            return keyword + nullablePart;
+        }
+
         if (!type.IsGenericType)
         {
-            return $"{type.Namespace}.{type.Name}{(isNullable ? "?" : string.Empty)}";
+            return $"{type.Namespace}.{type.Name}" + nullablePart;
         }
 
         var genericTypeDefinition = type.GetGenericTypeDefinition();
@@ -25,4 +31,16 @@ internal static class TypeExtensions
 
         return $"{genericTypeName}<{string.Join(", ", genericArguments.Select(x => GetFriendlyTypeName(x, isNullable)))}>";
     }
+
+    private static readonly Dictionary<Type, string> Keywords = new()
+    {
+        { typeof(bool), "bool" },
+        { typeof(byte), "byte" },
+        { typeof(short), "short" },
+        { typeof(int), "int" },
+        { typeof(long), "long" },
+        { typeof(float), "float" },
+        { typeof(double), "double" },
+        { typeof(string), "string" },
+    };
 }

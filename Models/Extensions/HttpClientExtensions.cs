@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Xdd.HttpHelpers.Models.Requests;
 using Xdd.HttpHelpers.Models.Requests.Parameters;
-using HttpMethod = Xdd.HttpHelpers.Models.Requests.HttpMethod;
 
 namespace Xdd.HttpHelpers.Models.Extensions;
 
@@ -43,11 +42,11 @@ public static class HttpClientExtensions
         ));
         return request.Method switch
         {
-            HttpMethod.GET => await httpClient.GetAsync(url),
-            HttpMethod.POST => await httpClient.PostAsync(url, body),
-            HttpMethod.PUT => await httpClient.PutAsync(url, body),
-            HttpMethod.DELETE => await httpClient.DeleteAsync(url),
-            HttpMethod.PATCH => await httpClient.PatchAsync(url, body),
+            HttpRequestMethod.GET => await httpClient.GetAsync(url),
+            HttpRequestMethod.POST => await httpClient.PostAsync(url, body),
+            HttpRequestMethod.PUT => await httpClient.PutAsync(url, body),
+            HttpRequestMethod.DELETE => await httpClient.DeleteAsync(url),
+            HttpRequestMethod.PATCH => await httpClient.PatchAsync(url, body),
             _ => throw new ArgumentOutOfRangeException(),
         };
     }

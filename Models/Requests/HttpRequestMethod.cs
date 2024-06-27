@@ -1,6 +1,6 @@
 ﻿namespace Xdd.HttpHelpers.Models.Requests;
 
-public enum HttpMethod
+public enum HttpRequestMethod
 {
     GET,
     POST,

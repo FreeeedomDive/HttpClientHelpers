@@ -36,10 +36,23 @@ internal class ControllerMethodsExtractor : IControllerMethodsExtractor
             {
                 var attributesTypes = parameterInfo.CustomAttributes.Select(attr => attr.AttributeType).ToHashSet();
                 var parameterName = parameterInfo.Name ?? string.Empty;
+                var parameterType = GetInnerType(parameterInfo.ParameterType);
+                var optionalValue = parameterInfo.IsOptional
+                    ? parameterInfo.DefaultValue is null
+                        ? "null"
+                        : parameterInfo.DefaultValue.ToString()
+                    : null;
+
+                // why bool.ToString() is UpperCase???
+                if (optionalValue is not null && parameterType == typeof(bool))
+                {
+                    optionalValue = optionalValue.ToLower();
+                }
+
                 return new ApiParameterInfo
                 {
                     Name = parameterName,
-                    Type = GetInnerType(parameterInfo.ParameterType),
+                    Type = parameterType,
                     IsNullable = IsNullable(parameterInfo),
                     Source = attributesTypes.Contains(typeof(FromRouteAttribute))
                         ? ParameterSource.Route
@@ -51,7 +64,7 @@ internal class ControllerMethodsExtractor : IControllerMethodsExtractor
                                     parameterName,
                                     $"Parameter should contain one of [From*] attributes, method: {controllerType.Name}.{method.Name}"
                                 ),
-                    OptionalValue = parameterInfo.IsOptional ? parameterInfo.DefaultValue is null ? "null" : parameterInfo.DefaultValue.ToString() : null,
+                    OptionalValue = optionalValue,
                 };
             }
         ).ToArray();

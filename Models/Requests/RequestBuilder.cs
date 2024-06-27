@@ -4,12 +4,12 @@ namespace Xdd.HttpHelpers.Models.Requests;
 
 public class RequestBuilder
 {
-    public RequestBuilder(string url, HttpMethod httpMethod)
+    public RequestBuilder(string url, HttpRequestMethod httpRequestMethod)
     {
         request = new HttpRequest
         {
             Url = url,
-            Method = httpMethod,
+            Method = httpRequestMethod,
             Parameters = new List<IRequestParameter>(),
         };
     }
