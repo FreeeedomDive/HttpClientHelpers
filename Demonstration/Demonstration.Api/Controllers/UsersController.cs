@@ -14,7 +14,7 @@ public class UsersController : Controller
     {
         return Array.Empty<UserDto>();
     }
-    
+
     [HttpGet("{id:guid}")]
     public ActionResult<UserDto> Read([FromRoute] Guid id)
     {
@@ -47,7 +47,8 @@ public class UsersController : Controller
         [FromBody] UsersFilterDto usersFilterDto,
         [FromQuery] int? skip = null,
         [FromQuery] int? take = null,
-        [FromQuery] bool includeDeleted = false)
+        [FromQuery] bool includeDeleted = false
+    )
     {
         return Array.Empty<UserDto>();
     }

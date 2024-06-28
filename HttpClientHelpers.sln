@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demonstration.Api", "Demons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demonstration.Api.Dto", "Demonstration\Demonstration.Api.Dto\Demonstration.Api.Dto.csproj", "{D35462D1-03A4-4E7A-A0E2-E0970507DC9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demonstration.Api.Client", "Demonstration\Demonstration.Api.Client\Demonstration.Api.Client.csproj", "{C5B0F3F3-BCE6-4D63-94AA-EF176C145FA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demonstration.Api.Client.RestSharpExample", "Demonstration\Demonstration.Api.Client.RestSharpExample\Demonstration.Api.Client.RestSharpExample.csproj", "{C5B0F3F3-BCE6-4D63-94AA-EF176C145FA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demonstration", "Demonstration\Demonstration\Demonstration.csproj", "{96CA40E9-2E08-4D71-807A-221ABC5B59E0}"
 EndProject

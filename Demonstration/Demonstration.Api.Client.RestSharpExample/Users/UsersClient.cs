@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Xdd.HttpHelpers.Models.Extensions;
 using Xdd.HttpHelpers.Models.Requests;
 
-namespace Demonstration.Api.Client.Users;
+namespace Demonstration.Api.Client.RestSharpExample.Users;
 
 public class UsersClient : IUsersClient
 {

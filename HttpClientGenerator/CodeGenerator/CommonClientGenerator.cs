@@ -10,7 +10,7 @@ internal class CommonClientGenerator : ICommonClientGenerator
     public GeneratedFileContent Generate(ApiControllerInfo[] apiControllerInfos, string apiProjectName, GeneratorOptions options)
     {
         var clientName = options.ClientName ?? $"{apiProjectName.Replace(".", string.Empty)}Client";
-        var interfaceName = options.InterfaceName ?? $"I{clientName}";
+        var interfaceName = options.InterfaceName ?? $"I{apiProjectName.Replace(".", string.Empty)}Client";
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
                  .AppendLine();

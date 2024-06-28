@@ -1,7 +1,7 @@
 /* Generated file */
 using System.Threading.Tasks;
 
-namespace Demonstration.Api.Client.Users;
+namespace Demonstration.Api.Client.RestSharpExample.Users;
 
 public interface IUsersClient
 {
