@@ -11,3 +11,13 @@ ApiClientGenerator.Generate<UsersController>(
         options.ClientType = ClientType.RestSharp; // by default
     }
 );
+
+ApiClientGenerator.Generate<UsersController>(
+    options =>
+    {
+        options.ClientNamespace = "Demonstration.Api.Client.HttpClientExample";
+        options.ClientName = "DemonstrationApiHttpClient";
+        options.ProjectPath = Path.Join("..", "..", "..", "..", "Demonstration.Api.Client.HttpClientExample");
+        options.ClientType = ClientType.SystemNetHttpClient;
+    }
+);

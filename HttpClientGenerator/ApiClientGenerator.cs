@@ -42,7 +42,7 @@ public static class ApiClientGenerator
         filesWriter.WriteFiles(options.ProjectPath, clientsFilesContent.Concat(new[] { commonInterfaceFileContent, commonClientFileContent }).ToArray());
 
         Console.WriteLine($"Generated {controllersInfo.Length} clients in namespace {options.ClientNamespace}");
-        Console.WriteLine("Make sure to install following NuGet packages to your project with generated clients: RestSharp, Xdd.HttpHelpers.HttpClientGenerator");
+        Console.WriteLine("Make sure to install following NuGet packages to your project with generated clients: RestSharp, Xdd.HttpHelpers.Models");
     }
 
     private static GeneratorOptions CreateDefaultOptions(string apiProjectName)

@@ -11,6 +11,7 @@ internal class ClientGenerator : IClientGenerator
     public GeneratedFileContent Generate(ApiControllerInfo apiControllerInfo, GeneratorOptions options)
     {
         var className = apiControllerInfo.GetClientName();
+        var clientImplementation = options.ClientType.ToClientTypeFullName();
         var sb = new StringBuilder()
                  .AppendLine("/* Generated file */")
                  .AppendLine("using System.Threading.Tasks;")
@@ -22,7 +23,7 @@ internal class ClientGenerator : IClientGenerator
                  .AppendLine()
                  .AppendLine($"public class {className} : {apiControllerInfo.GetClientName(true)}")
                  .AppendLine("{")
-                 .AppendIndent().AppendLine($"public {className}(RestSharp.RestClient client)")
+                 .AppendIndent().AppendLine($"public {className}({clientImplementation} client)")
                  .AppendIndent().AppendLine("{")
                  .AppendIndent(2).AppendLine("this.client = client;")
                  .AppendIndent().AppendLine("}")
@@ -71,7 +72,7 @@ internal class ClientGenerator : IClientGenerator
             sb.AppendIndent().AppendLine("}").AppendLine();
         }
 
-        sb.AppendIndent().AppendLine("private readonly RestSharp.RestClient client;")
+        sb.AppendIndent().AppendLine($"private readonly {clientImplementation} client;")
           .AppendLine("}");
         return new GeneratedFileContent
         {

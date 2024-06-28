@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demonstration.Api.Client.Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demonstration", "Demonstration\Demonstration\Demonstration.csproj", "{96CA40E9-2E08-4D71-807A-221ABC5B59E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demonstration.Api.Client.HttpClientExample", "Demonstration\Demonstration.Api.Client.HttpClientExample\Demonstration.Api.Client.HttpClientExample.csproj", "{BE147BA0-E0A4-4EE3-BC59-1D9E076499DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,11 +46,16 @@ Global
 		{96CA40E9-2E08-4D71-807A-221ABC5B59E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96CA40E9-2E08-4D71-807A-221ABC5B59E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96CA40E9-2E08-4D71-807A-221ABC5B59E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE147BA0-E0A4-4EE3-BC59-1D9E076499DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE147BA0-E0A4-4EE3-BC59-1D9E076499DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE147BA0-E0A4-4EE3-BC59-1D9E076499DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE147BA0-E0A4-4EE3-BC59-1D9E076499DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7021F4DE-6244-44D4-B61B-C9AC375DAA07} = {0391A96A-0375-4C67-A374-D2C11441A793}
 		{D35462D1-03A4-4E7A-A0E2-E0970507DC9C} = {0391A96A-0375-4C67-A374-D2C11441A793}
 		{C5B0F3F3-BCE6-4D63-94AA-EF176C145FA7} = {0391A96A-0375-4C67-A374-D2C11441A793}
 		{96CA40E9-2E08-4D71-807A-221ABC5B59E0} = {0391A96A-0375-4C67-A374-D2C11441A793}
+		{BE147BA0-E0A4-4EE3-BC59-1D9E076499DB} = {0391A96A-0375-4C67-A374-D2C11441A793}
 	EndGlobalSection
 EndGlobal

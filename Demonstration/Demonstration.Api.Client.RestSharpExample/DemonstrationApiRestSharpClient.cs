@@ -6,9 +6,9 @@ namespace Demonstration.Api.Client.RestSharpExample;
 
 public class DemonstrationApiRestSharpClient : IDemonstrationApiClient
 {
-    public DemonstrationApiRestSharpClient(RestSharp.RestClient restClient)
+    public DemonstrationApiRestSharpClient(RestSharp.RestClient client)
     {
-        Users = new UsersClient(restClient);
+        Users = new UsersClient(client);
     }
 
     public IUsersClient Users { get; }

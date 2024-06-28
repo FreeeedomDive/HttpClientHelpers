@@ -24,12 +24,12 @@ internal class CommonClientGenerator : ICommonClientGenerator
           .AppendLine()
           .AppendLine($"public class {clientName} : {interfaceName}")
           .AppendLine("{")
-          .AppendIndent().AppendLine($"public {clientName}(RestSharp.RestClient restClient)")
+          .AppendIndent().AppendLine($"public {clientName}({options.ClientType.ToClientTypeFullName()} client)")
           .AppendIndent().AppendLine("{");
 
         foreach (var apiControllerInfo in apiControllerInfos)
         {
-            sb.AppendIndent(2).AppendLine($"{apiControllerInfo.Name} = new {apiControllerInfo.GetClientName()}(restClient);");
+            sb.AppendIndent(2).AppendLine($"{apiControllerInfo.Name} = new {apiControllerInfo.GetClientName()}(client);");
         }
 
         sb.AppendIndent().AppendLine("}").AppendLine();
