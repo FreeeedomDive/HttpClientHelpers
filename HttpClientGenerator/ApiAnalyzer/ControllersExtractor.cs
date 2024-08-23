@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Xdd.HttpHelpers.HttpClientGenerator.Models;
+using Xdd.HttpHelpers.Models.Attributes;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.ApiAnalyzer;
 
@@ -30,6 +31,12 @@ internal class ControllersExtractor : IControllersExtractor
     {
         var methods = controllerMethodsExtractor.Extract(controllerType);
         if (methods.Length == 0)
+        {
+            return null;
+        }
+
+        var dontGenerateAttribute = controllerType.GetCustomAttribute<DontGenerateAttribute>();
+        if (dontGenerateAttribute is not null)
         {
             return null;
         }

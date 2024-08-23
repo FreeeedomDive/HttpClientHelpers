@@ -11,6 +11,7 @@
         <Description>Models for HTTP</Description>
         <AssemblyName>Xdd.HttpHelpers.Models</AssemblyName>
         <RootNamespace>Xdd.HttpHelpers.Models</RootNamespace>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

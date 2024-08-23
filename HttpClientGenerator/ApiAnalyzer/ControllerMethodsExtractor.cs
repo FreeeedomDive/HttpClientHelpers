@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Xdd.HttpHelpers.HttpClientGenerator.Models;
+using Xdd.HttpHelpers.Models.Attributes;
 
 namespace Xdd.HttpHelpers.HttpClientGenerator.ApiAnalyzer;
 
@@ -26,6 +27,12 @@ internal class ControllerMethodsExtractor : IControllerMethodsExtractor
     {
         var httpMethodAttribute = method.GetCustomAttribute<HttpMethodAttribute>();
         if (httpMethodAttribute is null)
+        {
+            return Array.Empty<ApiMethodInfo>();
+        }
+
+        var dontGenerateAttribute = method.GetCustomAttribute<DontGenerateAttribute>();
+        if (dontGenerateAttribute is not null)
         {
             return Array.Empty<ApiMethodInfo>();
         }
